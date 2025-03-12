@@ -1,12 +1,12 @@
 
-import { useState } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { JobCard } from "@/components/job/JobCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, MapPin, Briefcase, SlidersHorizontal } from "lucide-react";
+import { Search, MapPin, SlidersHorizontal } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import JobFilters from "@/components/job/JobFilters";
+import { useState } from "react";
 
 // Mock data for jobs with Indian cities
 const JOBS = [
@@ -84,14 +84,14 @@ const JOBS = [
   },
 ];
 
-const Jobs = () => {
+const BrowseJobs = () => {
   const [showFilters, setShowFilters] = useState(false);
   
   return (
     <MainLayout>
       <div className="bg-muted py-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-6">Find Your Perfect Job</h1>
+          <h1 className="text-3xl font-bold mb-6">Browse All Jobs</h1>
           
           <div className="bg-white rounded-lg p-4 shadow-sm">
             <div className="flex flex-col md:flex-row gap-4">
@@ -167,4 +167,4 @@ const Jobs = () => {
   );
 };
 
-export default Jobs;
+export default BrowseJobs;

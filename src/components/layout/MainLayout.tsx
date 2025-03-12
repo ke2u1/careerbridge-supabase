@@ -14,7 +14,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center space-x-2">
               <BriefcaseIcon className="h-6 w-6 text-primary" />
-              <span className="font-semibold text-xl">JobPortal</span>
+              <span className="font-semibold text-xl">JobScout</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -22,11 +22,11 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
               <Link to="/jobs" className="text-muted-foreground hover:text-foreground transition-colors">
                 Find Jobs
               </Link>
-              <Link to="/salary" className="text-muted-foreground hover:text-foreground transition-colors">
-                Salary Estimate
+              <Link to="/companies" className="text-muted-foreground hover:text-foreground transition-colors">
+                Browse Companies
               </Link>
-              <Link to="/profile" className="text-muted-foreground hover:text-foreground transition-colors">
-                Post a Job
+              <Link to="/salary" className="text-muted-foreground hover:text-foreground transition-colors">
+                Salary Calculator
               </Link>
             </div>
 
@@ -56,11 +56,11 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
               <Link to="/jobs" className="block text-muted-foreground hover:text-foreground">
                 Find Jobs
               </Link>
-              <Link to="/salary" className="block text-muted-foreground hover:text-foreground">
-                Salary Estimate
+              <Link to="/companies" className="block text-muted-foreground hover:text-foreground">
+                Browse Companies
               </Link>
-              <Link to="/profile" className="block text-muted-foreground hover:text-foreground">
-                Post a Job
+              <Link to="/salary" className="block text-muted-foreground hover:text-foreground">
+                Salary Calculator
               </Link>
               <div className="pt-4 space-y-2">
                 <Button variant="outline" className="w-full text-primary">
@@ -115,7 +115,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t text-center text-muted-foreground">
-            <p>© 2024 JobPortal. All rights reserved.</p>
+            <p>© 2024 JobScout. All rights reserved.</p>
           </div>
         </div>
       </footer>

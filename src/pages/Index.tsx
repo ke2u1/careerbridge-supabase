@@ -4,13 +4,14 @@ import { Input } from "@/components/ui/input";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { JobCard } from "@/components/job/JobCard";
 import { Search, MapPin, Briefcase } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const FEATURED_JOBS = [
   {
     title: "Senior Frontend Developer",
-    company: "TechCorp",
-    location: "San Francisco, CA",
-    salary: "$120k - $150k",
+    company: "TechSolutions India",
+    location: "Bangalore, India",
+    salary: "₹18L - ₹24L",
     type: "Full-time",
     postedTime: "2 days ago",
   },
@@ -18,15 +19,15 @@ const FEATURED_JOBS = [
     title: "Product Designer",
     company: "DesignLabs",
     location: "Remote",
-    salary: "$90k - $120k",
+    salary: "₹12L - ₹18L",
     type: "Full-time",
     postedTime: "1 day ago",
   },
   {
     title: "DevOps Engineer",
-    company: "CloudTech",
-    location: "New York, NY",
-    salary: "$130k - $160k",
+    company: "CloudTech India",
+    location: "Mumbai, India",
+    salary: "₹20L - ₹28L",
     type: "Full-time",
     postedTime: "3 days ago",
   },
@@ -43,7 +44,7 @@ const Index = () => {
               Find Your Dream Job Today
             </h1>
             <p className="text-xl text-muted-foreground mb-8 animate-fade-up" style={{ animationDelay: "0.1s" }}>
-              Connect with top companies and opportunities that match your skills and aspirations.
+              Connect with top companies across India and opportunities that match your skills and aspirations.
             </p>
 
             <div className="bg-white rounded-lg p-4 shadow-lg animate-fade-up" style={{ animationDelay: "0.2s" }}>
@@ -77,7 +78,7 @@ const Index = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Featured Jobs</h2>
             <p className="text-muted-foreground">
-              Discover opportunities from companies actively hiring
+              Discover opportunities from companies actively hiring across India
             </p>
           </div>
 
@@ -88,9 +89,11 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="outline" size="lg">
-              View All Jobs
-            </Button>
+            <Link to="/jobs">
+              <Button variant="outline" size="lg">
+                View All Jobs
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -105,7 +108,7 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-semibold mb-2">Extensive Job Listings</h3>
               <p className="text-muted-foreground">
-                Access thousands of job opportunities from top companies worldwide.
+                Access thousands of job opportunities from top companies across India.
               </p>
             </div>
             <div className="text-center p-6">
