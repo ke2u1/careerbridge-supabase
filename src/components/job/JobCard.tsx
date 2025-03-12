@@ -1,9 +1,12 @@
+
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BookmarkIcon, MapPin, IndianRupee, Clock, Briefcase } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface JobCardProps {
+  id?: number;
   title: string;
   company: string;
   location: string;
@@ -14,6 +17,7 @@ interface JobCardProps {
 }
 
 export const JobCard = ({
+  id,
   title,
   company,
   location,
@@ -28,7 +32,15 @@ export const JobCard = ({
         <div className="flex items-start space-x-4">
           <div className="h-12 w-12 rounded-lg bg-muted flex items-center justify-center">
             {logo ? (
-              <img src={logo} alt={company} className="h-8 w-8" />
+              <img 
+                src={logo} 
+                alt={company} 
+                className="h-8 w-8 rounded-md object-contain"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = "/placeholder.svg";
+                }}
+              />
             ) : (
               <div className="h-8 w-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                 <Briefcase className="h-5 w-5" />
@@ -70,7 +82,13 @@ export const JobCard = ({
         <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20">
           {type}
         </Badge>
-        <Button variant="default">Apply Now</Button>
+        {id ? (
+          <Link to={`/jobs/${id}`}>
+            <Button variant="default">Apply Now</Button>
+          </Link>
+        ) : (
+          <Button variant="default">Apply Now</Button>
+        )}
       </div>
     </Card>
   );

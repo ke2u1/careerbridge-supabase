@@ -8,7 +8,7 @@ import { Search, MapPin, Briefcase, SlidersHorizontal } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import JobFilters from "@/components/job/JobFilters";
 
-// Mock data for jobs with Indian cities
+// Mock data for jobs with Indian cities and company logos
 const JOBS = [
   {
     id: 1,
@@ -18,6 +18,7 @@ const JOBS = [
     salary: "₹18L - ₹24L",
     type: "Full-time",
     postedTime: "2 days ago",
+    logo: "https://logo.clearbit.com/infosys.com"
   },
   {
     id: 2,
@@ -27,6 +28,7 @@ const JOBS = [
     salary: "₹12L - ₹18L",
     type: "Full-time",
     postedTime: "1 day ago",
+    logo: "https://logo.clearbit.com/wipro.com"
   },
   {
     id: 3,
@@ -36,6 +38,7 @@ const JOBS = [
     salary: "₹20L - ₹28L",
     type: "Full-time",
     postedTime: "3 days ago",
+    logo: "https://logo.clearbit.com/tcs.com"
   },
   {
     id: 4,
@@ -45,6 +48,7 @@ const JOBS = [
     salary: "₹14L - ₹18L",
     type: "Full-time",
     postedTime: "5 days ago",
+    logo: "https://logo.clearbit.com/hcl.com"
   },
   {
     id: 5,
@@ -54,6 +58,7 @@ const JOBS = [
     salary: "₹16L - ₹22L",
     type: "Full-time",
     postedTime: "1 week ago",
+    logo: "https://logo.clearbit.com/mindtree.com"
   },
   {
     id: 6,
@@ -63,6 +68,7 @@ const JOBS = [
     salary: "₹10L - ₹14L",
     type: "Contract",
     postedTime: "2 days ago",
+    logo: "https://logo.clearbit.com/cognizant.com"
   },
   {
     id: 7,
@@ -72,6 +78,7 @@ const JOBS = [
     salary: "₹15L - ₹20L",
     type: "Full-time",
     postedTime: "4 days ago",
+    logo: "https://logo.clearbit.com/techmahindra.com"
   },
   {
     id: 8,
@@ -81,6 +88,7 @@ const JOBS = [
     salary: "₹18L - ₹25L",
     type: "Full-time",
     postedTime: "3 days ago",
+    logo: "https://logo.clearbit.com/lti.com"
   },
 ];
 
@@ -152,7 +160,7 @@ const Jobs = () => {
           
           <div className="grid grid-cols-1 gap-4">
             {JOBS.map((job) => (
-              <JobCard key={job.id} {...job} />
+              <JobCard key={job.id} id={job.id} {...job} />
             ))}
           </div>
         </div>

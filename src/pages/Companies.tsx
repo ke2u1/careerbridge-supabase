@@ -1,16 +1,16 @@
 
 import { MainLayout } from "@/components/layout/MainLayout";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Building2, Users, MapPin } from "lucide-react";
+import { Search, MapPin } from "lucide-react";
+import { CompanyCard } from "@/components/company/CompanyCard";
 
-// Mock data for companies
+// Mock data for companies with logos
 const COMPANIES = [
   {
     id: 1,
     name: "TechSolutions India",
-    logo: "/placeholder.svg",
+    logo: "https://logo.clearbit.com/infosys.com",
     industry: "Information Technology",
     location: "Bangalore, India",
     employees: "500-1000",
@@ -19,7 +19,7 @@ const COMPANIES = [
   {
     id: 2,
     name: "Innovate Labs",
-    logo: "/placeholder.svg",
+    logo: "https://logo.clearbit.com/wipro.com",
     industry: "Software Development",
     location: "Hyderabad, India",
     employees: "100-500",
@@ -28,7 +28,7 @@ const COMPANIES = [
   {
     id: 3,
     name: "Global Systems",
-    logo: "/placeholder.svg",
+    logo: "https://logo.clearbit.com/tcs.com",
     industry: "IT Consulting",
     location: "Mumbai, India",
     employees: "1000-5000",
@@ -37,7 +37,7 @@ const COMPANIES = [
   {
     id: 4,
     name: "NextGen Solutions",
-    logo: "/placeholder.svg",
+    logo: "https://logo.clearbit.com/hcl.com",
     industry: "Software Services",
     location: "Pune, India",
     employees: "100-500",
@@ -46,7 +46,7 @@ const COMPANIES = [
   {
     id: 5,
     name: "Digital Creations",
-    logo: "/placeholder.svg",
+    logo: "https://logo.clearbit.com/mindtree.com",
     industry: "Digital Marketing",
     location: "Delhi, India",
     employees: "50-100",
@@ -55,7 +55,7 @@ const COMPANIES = [
   {
     id: 6,
     name: "CloudTech India",
-    logo: "/placeholder.svg",
+    logo: "https://logo.clearbit.com/cognizant.com",
     industry: "Cloud Solutions",
     location: "Chennai, India",
     employees: "500-1000",
@@ -97,35 +97,7 @@ const Companies = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {COMPANIES.map((company) => (
-            <Card key={company.id} className="overflow-hidden hover:shadow-md transition-shadow">
-              <div className="p-6">
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-16 h-16 bg-muted rounded-md flex items-center justify-center">
-                    <img src={company.logo} alt={company.name} className="w-12 h-12" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg">{company.name}</h3>
-                    <p className="text-muted-foreground">{company.industry}</p>
-                  </div>
-                </div>
-                
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-muted-foreground">
-                    <MapPin className="h-4 w-4 mr-2" />
-                    {company.location}
-                  </div>
-                  <div className="flex items-center text-muted-foreground">
-                    <Users className="h-4 w-4 mr-2" />
-                    {company.employees} employees
-                  </div>
-                </div>
-                
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-primary font-medium">{company.openJobs} open positions</span>
-                  <Button variant="outline">View Company</Button>
-                </div>
-              </div>
-            </Card>
+            <CompanyCard key={company.id} {...company} />
           ))}
         </div>
 

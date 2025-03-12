@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -30,14 +31,18 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
-              <Button variant="outline" className="text-primary flex items-center gap-2">
-                <LogIn className="h-4 w-4" />
-                <span>Sign In</span>
-              </Button>
-              <Button className="flex items-center gap-2">
-                <UserPlus className="h-4 w-4" />
-                <span>Sign Up</span>
-              </Button>
+              <Link to="/signin">
+                <Button variant="outline" className="text-primary flex items-center gap-2">
+                  <LogIn className="h-4 w-4" />
+                  <span>Sign In</span>
+                </Button>
+              </Link>
+              <Link to="/signup">
+                <Button className="flex items-center gap-2">
+                  <UserPlus className="h-4 w-4" />
+                  <span>Sign Up</span>
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Navigation */}
@@ -64,14 +69,18 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
                 Salary Calculator
               </Link>
               <div className="pt-4 space-y-2">
-                <Button variant="outline" className="w-full text-primary flex items-center gap-2 justify-center">
-                  <LogIn className="h-4 w-4" />
-                  <span>Sign In</span>
-                </Button>
-                <Button className="w-full flex items-center gap-2 justify-center">
-                  <UserPlus className="h-4 w-4" />
-                  <span>Sign Up</span>
-                </Button>
+                <Link to="/signin" className="block w-full">
+                  <Button variant="outline" className="w-full text-primary flex items-center gap-2 justify-center">
+                    <LogIn className="h-4 w-4" />
+                    <span>Sign In</span>
+                  </Button>
+                </Link>
+                <Link to="/signup" className="block w-full">
+                  <Button className="w-full flex items-center gap-2 justify-center">
+                    <UserPlus className="h-4 w-4" />
+                    <span>Sign Up</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -118,7 +127,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t text-center text-muted-foreground">
-            <p>© 2035 JobScout. All rights reserved.</p>
+            <p>© 2025 JobScout. All rights reserved.</p>
           </div>
         </div>
       </footer>
