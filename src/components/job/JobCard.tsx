@@ -1,8 +1,7 @@
-
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookmarkIcon, MapPin, DollarSign, Clock } from "lucide-react";
+import { BookmarkIcon, MapPin, IndianRupee, Clock, Briefcase } from "lucide-react";
 
 interface JobCardProps {
   title: string;
@@ -31,8 +30,8 @@ export const JobCard = ({
             {logo ? (
               <img src={logo} alt={company} className="h-8 w-8" />
             ) : (
-              <div className="h-8 w-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-semibold">
-                {company[0]}
+              <div className="h-8 w-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                <Briefcase className="h-5 w-5" />
               </div>
             )}
           </div>
@@ -58,7 +57,7 @@ export const JobCard = ({
           {location}
         </div>
         <div className="flex items-center text-muted-foreground">
-          <DollarSign className="h-4 w-4 mr-1" />
+          <IndianRupee className="h-4 w-4 mr-1" />
           {salary}
         </div>
         <div className="flex items-center text-muted-foreground">

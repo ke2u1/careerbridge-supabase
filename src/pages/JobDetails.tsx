@@ -1,4 +1,3 @@
-
 import { MainLayout } from "@/components/layout/MainLayout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -11,7 +10,7 @@ const JOB = {
   title: "Senior Frontend Developer",
   company: "TechCorp",
   location: "San Francisco, CA",
-  salary: "$120k - $150k",
+  salary: "₹18L - ₹24L",
   type: "Full-time",
   postedTime: "2 days ago",
   description: `

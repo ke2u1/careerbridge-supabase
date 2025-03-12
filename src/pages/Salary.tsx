@@ -1,11 +1,10 @@
-
 import { useState } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { DollarSign, TrendingUp, Building } from "lucide-react";
+import { IndianRupee, TrendingUp, Building } from "lucide-react";
 import SalaryChart from "@/components/salary/SalaryChart";
 
 const Salary = () => {
@@ -127,7 +126,7 @@ const Salary = () => {
                         Estimated Salary Range
                       </h2>
                       <div className="text-4xl font-bold">
-                        ${Math.floor(estimatedSalary * 0.9).toLocaleString()} - ${Math.floor(estimatedSalary * 1.1).toLocaleString()}
+                        ₹{Math.floor(estimatedSalary * 0.9).toLocaleString()} - ₹{Math.floor(estimatedSalary * 1.1).toLocaleString()}
                       </div>
                       <p className="mt-2 text-primary-foreground/80">
                         per year
@@ -146,9 +145,9 @@ const Salary = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                       <Card className="bg-muted">
                         <CardContent className="p-4 flex flex-col items-center">
-                          <DollarSign className="h-8 w-8 text-primary mb-2" />
+                          <IndianRupee className="h-8 w-8 text-primary mb-2" />
                           <h3 className="font-medium">Market Average</h3>
-                          <p className="font-bold">${Math.floor(estimatedSalary * 0.98).toLocaleString()}</p>
+                          <p className="font-bold">₹{Math.floor(estimatedSalary * 0.98).toLocaleString()}</p>
                         </CardContent>
                       </Card>
                       
@@ -182,7 +181,7 @@ const Salary = () => {
                           <h3 className="font-medium">Senior UX Designer</h3>
                           <p className="text-sm text-muted-foreground">National Average</p>
                         </div>
-                        <div className="font-bold">${Math.floor(estimatedSalary * 0.95).toLocaleString()}</div>
+                        <div className="font-bold">₹{Math.floor(estimatedSalary * 0.95).toLocaleString()}</div>
                       </div>
                       
                       <div className="flex justify-between items-center p-4 bg-muted rounded-lg">
@@ -190,7 +189,7 @@ const Salary = () => {
                           <h3 className="font-medium">Frontend Team Lead</h3>
                           <p className="text-sm text-muted-foreground">National Average</p>
                         </div>
-                        <div className="font-bold">${Math.floor(estimatedSalary * 1.15).toLocaleString()}</div>
+                        <div className="font-bold">₹{Math.floor(estimatedSalary * 1.15).toLocaleString()}</div>
                       </div>
                       
                       <div className="flex justify-between items-center p-4 bg-muted rounded-lg">
@@ -198,7 +197,7 @@ const Salary = () => {
                           <h3 className="font-medium">Full Stack Developer</h3>
                           <p className="text-sm text-muted-foreground">National Average</p>
                         </div>
-                        <div className="font-bold">${Math.floor(estimatedSalary * 1.05).toLocaleString()}</div>
+                        <div className="font-bold">₹{Math.floor(estimatedSalary * 1.05).toLocaleString()}</div>
                       </div>
                     </div>
                   </CardContent>
@@ -207,7 +206,7 @@ const Salary = () => {
             ) : (
               <div className="h-full flex items-center justify-center text-center p-12 bg-muted rounded-lg">
                 <div>
-                  <DollarSign className="h-12 w-12 text-primary/40 mx-auto mb-4" />
+                  <IndianRupee className="h-12 w-12 text-primary/40 mx-auto mb-4" />
                   <h2 className="text-xl font-medium mb-2">Your Salary Estimate</h2>
                   <p className="text-muted-foreground">
                     Fill out the form to get an accurate salary estimate
