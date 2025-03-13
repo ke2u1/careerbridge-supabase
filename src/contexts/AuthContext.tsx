@@ -72,11 +72,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signUp = async (email: string, password: string, userData: any) => {
     try {
       setLoading(true);
+      // Ensure userData has a role if not already specified
+      const userDataWithRole = {
+        ...userData,
+        role: userData.role || 'user'
+      };
+      
       const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: userData
+          data: userDataWithRole
         }
       });
 

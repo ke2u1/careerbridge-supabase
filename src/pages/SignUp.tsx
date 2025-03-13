@@ -38,7 +38,8 @@ const SignUp = () => {
       const userData = {
         full_name: fullName,
         phone: phone,
-        is_company: isCompany
+        is_company: isCompany,
+        role: "user" // Explicitly set the role
       };
       
       await signUp(email, password, userData);
