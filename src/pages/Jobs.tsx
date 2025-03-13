@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { JobCard } from "@/components/job/JobCard";
 import { Button } from "@/components/ui/button";
@@ -94,6 +94,66 @@ const JOBS = [
 
 const Jobs = () => {
   const [showFilters, setShowFilters] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [locationQuery, setLocationQuery] = useState("");
+  const [filteredJobs, setFilteredJobs] = useState(JOBS);
+  const [sortOrder, setSortOrder] = useState("newest");
+  
+  // Handle search and filtering
+  useEffect(() => {
+    let result = [...JOBS];
+    
+    // Filter by search query (job title, keywords, company)
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(job => 
+        job.title.toLowerCase().includes(query) || 
+        job.company.toLowerCase().includes(query)
+      );
+    }
+    
+    // Filter by location
+    if (locationQuery) {
+      const query = locationQuery.toLowerCase();
+      result = result.filter(job => 
+        job.location.toLowerCase().includes(query)
+      );
+    }
+    
+    // Sort results
+    switch (sortOrder) {
+      case "newest":
+        // For mock data we'll just use the array order as is
+        break;
+      case "relevant":
+        // For mock data, just shuffle a bit
+        result.sort((a, b) => a.id % 2 - b.id % 2);
+        break;
+      case "salary-high":
+        // Extract the higher number from the salary range and sort
+        result.sort((a, b) => {
+          const aMaxSalary = parseInt(a.salary.split('₹')[1].split('L')[0].trim());
+          const bMaxSalary = parseInt(b.salary.split('₹')[1].split('L')[0].trim());
+          return bMaxSalary - aMaxSalary;
+        });
+        break;
+      case "salary-low":
+        // Extract the lower number from the salary range and sort
+        result.sort((a, b) => {
+          const aMinSalary = parseInt(a.salary.split('₹')[1].split('-')[0].trim());
+          const bMinSalary = parseInt(b.salary.split('₹')[1].split('-')[0].trim());
+          return aMinSalary - bMinSalary;
+        });
+        break;
+    }
+    
+    setFilteredJobs(result);
+  }, [searchQuery, locationQuery, sortOrder]);
+  
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Filtering is already handled by the useEffect
+  };
   
   return (
     <MainLayout>
@@ -102,12 +162,14 @@ const Jobs = () => {
           <h1 className="text-3xl font-bold mb-6">Find Your Perfect Job</h1>
           
           <div className="bg-white rounded-lg p-4 shadow-sm">
-            <div className="flex flex-col md:flex-row gap-4">
+            <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
                 <Input 
                   placeholder="Job title, keywords, or company" 
                   className="pl-10"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
               <div className="flex-1 relative">
@@ -115,12 +177,14 @@ const Jobs = () => {
                 <Input 
                   placeholder="Location or remote" 
                   className="pl-10"
+                  value={locationQuery}
+                  onChange={(e) => setLocationQuery(e.target.value)}
                 />
               </div>
-              <Button size="lg" className="md:w-auto">
+              <Button type="submit" size="lg" className="md:w-auto">
                 Find Jobs
               </Button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -129,11 +193,15 @@ const Jobs = () => {
         <div className="flex justify-between items-center mb-6">
           <div>
             <h2 className="text-xl font-semibold">
-              {JOBS.length} jobs available
+              {filteredJobs.length} jobs available
             </h2>
           </div>
           <div className="flex items-center gap-4">
-            <Select defaultValue="newest">
+            <Select 
+              defaultValue="newest" 
+              value={sortOrder}
+              onValueChange={setSortOrder}
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
@@ -159,9 +227,15 @@ const Jobs = () => {
           {showFilters && <JobFilters />}
           
           <div className="grid grid-cols-1 gap-4">
-            {JOBS.map((job) => (
-              <JobCard key={job.id} id={job.id} {...job} />
-            ))}
+            {filteredJobs.length > 0 ? (
+              filteredJobs.map((job) => (
+                <JobCard key={job.id} id={job.id} {...job} />
+              ))
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">No jobs found. Try adjusting your search criteria.</p>
+              </div>
+            )}
           </div>
         </div>
 

@@ -30,14 +30,12 @@ const About = () => {
               Join Our Team <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
-          <div className="bg-muted rounded-lg aspect-square flex items-center justify-center">
-            <div className="text-center p-8">
-              <div className="inline-flex items-center justify-center p-4 bg-background rounded-full mb-4">
-                <Building className="h-12 w-12 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold">Our Vision</h3>
-              <p className="mt-2">To be the most trusted platform for career growth and talent acquisition in India</p>
-            </div>
+          <div className="rounded-lg overflow-hidden aspect-square">
+            <img 
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c" 
+              alt="Team collaboration" 
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
 
@@ -80,18 +78,26 @@ const About = () => {
           <h2 className="text-3xl font-bold mb-8 text-center">Our Team</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[
-              { name: "Vikram Sharma", title: "Founder & CEO", image: "/placeholder.svg" },
-              { name: "Priya Patel", title: "Chief Technology Officer", image: "/placeholder.svg" },
-              { name: "Raj Malhotra", title: "Head of Product", image: "/placeholder.svg" },
-              { name: "Ananya Desai", title: "Chief Marketing Officer", image: "/placeholder.svg" },
-              { name: "Arjun Nair", title: "Head of Customer Success", image: "/placeholder.svg" },
-              { name: "Meera Singh", title: "Head of Sales", image: "/placeholder.svg" },
-              { name: "Karthik Kumar", title: "Lead Engineer", image: "/placeholder.svg" },
-              { name: "Divya Reddy", title: "UX Director", image: "/placeholder.svg" },
+              { name: "Vikram Sharma", title: "Founder & CEO", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop" },
+              { name: "Priya Patel", title: "Chief Technology Officer", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&h=500&fit=crop" },
+              { name: "Raj Malhotra", title: "Head of Product", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=500&fit=crop" },
+              { name: "Ananya Desai", title: "Chief Marketing Officer", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&h=500&fit=crop" },
+              { name: "Arjun Nair", title: "Head of Customer Success", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=500&fit=crop" },
+              { name: "Meera Singh", title: "Head of Sales", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&h=500&fit=crop" },
+              { name: "Karthik Kumar", title: "Lead Engineer", image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=500&h=500&fit=crop" },
+              { name: "Divya Reddy", title: "UX Director", image: "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=500&h=500&fit=crop" },
             ].map((member, index) => (
               <Card key={index} className="overflow-hidden">
                 <div className="aspect-square bg-muted">
-                  <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                  <img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/placeholder.svg";
+                    }}
+                  />
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold">{member.name}</h3>
@@ -99,6 +105,22 @@ const About = () => {
                 </div>
               </Card>
             ))}
+          </div>
+        </div>
+
+        <div className="relative rounded-lg overflow-hidden mb-16">
+          <img 
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978" 
+            alt="Our office" 
+            className="w-full h-64 object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <div className="text-white text-center p-8">
+              <h3 className="text-2xl font-bold mb-2">Our Workplace</h3>
+              <p className="max-w-lg">
+                A collaborative environment where innovation and creativity thrive
+              </p>
+            </div>
           </div>
         </div>
 

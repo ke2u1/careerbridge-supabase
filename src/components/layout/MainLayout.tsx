@@ -1,11 +1,27 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Search, Menu, BriefcaseIcon, UserCircle, LogIn, UserPlus } from 'lucide-react';
+import { Search, Menu, BriefcaseIcon, UserCircle, LogIn, UserPlus, LogOut } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuLabel, 
+  DropdownMenuSeparator, 
+  DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
 
 export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -31,18 +47,50 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
-              <Link to="/signin">
-                <Button variant="outline" className="text-primary flex items-center gap-2">
-                  <LogIn className="h-4 w-4" />
-                  <span>Sign In</span>
-                </Button>
-              </Link>
-              <Link to="/signup">
-                <Button className="flex items-center gap-2">
-                  <UserPlus className="h-4 w-4" />
-                  <span>Sign Up</span>
-                </Button>
-              </Link>
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="flex items-center gap-2">
+                      <UserCircle className="h-4 w-4" />
+                      <span>My Account</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/profile" className="w-full cursor-pointer">
+                        Profile
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/my-applications" className="w-full cursor-pointer">
+                        My Applications
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <>
+                  <Link to="/signin">
+                    <Button variant="outline" className="text-primary flex items-center gap-2">
+                      <LogIn className="h-4 w-4" />
+                      <span>Sign In</span>
+                    </Button>
+                  </Link>
+                  <Link to="/signup">
+                    <Button className="flex items-center gap-2">
+                      <UserPlus className="h-4 w-4" />
+                      <span>Sign Up</span>
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile Navigation */}
@@ -69,18 +117,38 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
                 Salary Calculator
               </Link>
               <div className="pt-4 space-y-2">
-                <Link to="/signin" className="block w-full">
-                  <Button variant="outline" className="w-full text-primary flex items-center gap-2 justify-center">
-                    <LogIn className="h-4 w-4" />
-                    <span>Sign In</span>
-                  </Button>
-                </Link>
-                <Link to="/signup" className="block w-full">
-                  <Button className="w-full flex items-center gap-2 justify-center">
-                    <UserPlus className="h-4 w-4" />
-                    <span>Sign Up</span>
-                  </Button>
-                </Link>
+                {user ? (
+                  <>
+                    <Link to="/profile" className="block w-full">
+                      <Button variant="outline" className="w-full flex items-center gap-2 justify-center">
+                        <UserCircle className="h-4 w-4" />
+                        <span>Profile</span>
+                      </Button>
+                    </Link>
+                    <Button 
+                      className="w-full flex items-center gap-2 justify-center" 
+                      onClick={handleSignOut}
+                    >
+                      <LogOut className="h-4 w-4" />
+                      <span>Sign Out</span>
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/signin" className="block w-full">
+                      <Button variant="outline" className="w-full text-primary flex items-center gap-2 justify-center">
+                        <LogIn className="h-4 w-4" />
+                        <span>Sign In</span>
+                      </Button>
+                    </Link>
+                    <Link to="/signup" className="block w-full">
+                      <Button className="w-full flex items-center gap-2 justify-center">
+                        <UserPlus className="h-4 w-4" />
+                        <span>Sign Up</span>
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -14,7 +14,7 @@ const BLOG_POSTS = [
     author: "Priya Sharma",
     date: "May 15, 2024",
     category: "Career Advice",
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=768&h=432"
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const BLOG_POSTS = [
     author: "Raj Kumar",
     date: "May 8, 2024",
     category: "Salary Insights",
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=768&h=432"
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const BLOG_POSTS = [
     author: "Aditya Patel",
     date: "April 30, 2024",
     category: "Workplace Trends",
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&auto=format&fit=crop&w=768&h=432"
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const BLOG_POSTS = [
     author: "Neha Gupta",
     date: "April 22, 2024",
     category: "Industry Insights",
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1574887427561-d3d5d58c9273?ixlib=rb-1.2.1&auto=format&fit=crop&w=768&h=432"
   },
   {
     id: 5,
@@ -50,7 +50,7 @@ const BLOG_POSTS = [
     author: "Vikram Singh",
     date: "April 15, 2024",
     category: "Career Advice",
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-1.2.1&auto=format&fit=crop&w=768&h=432"
   },
   {
     id: 6,
@@ -59,7 +59,7 @@ const BLOG_POSTS = [
     author: "Ananya Desai",
     date: "April 8, 2024",
     category: "Career Development",
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-1.2.1&auto=format&fit=crop&w=768&h=432"
   }
 ];
 
@@ -71,8 +71,13 @@ const CATEGORIES = [
 const Blog = () => {
   return (
     <MainLayout>
-      <div className="bg-muted py-12">
-        <div className="container mx-auto px-4">
+      <div className="bg-muted py-12 relative overflow-hidden">
+        <img 
+          src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" 
+          alt="Blog header" 
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-10"
+        />
+        <div className="container mx-auto px-4 relative z-10">
           <h1 className="text-4xl font-bold mb-4">Blog & Resources</h1>
           <p className="text-muted-foreground mb-6 max-w-2xl">
             Expert advice and insights on careers, hiring trends, and the Indian job market
@@ -96,6 +101,10 @@ const Blog = () => {
                       src={post.image} 
                       alt={post.title} 
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "/placeholder.svg";
+                      }}
                     />
                   </div>
                   <div className="p-6">
@@ -151,6 +160,10 @@ const Blog = () => {
                         src={post.image} 
                         alt={post.title} 
                         className="w-full h-full object-cover rounded"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "/placeholder.svg";
+                        }}
                       />
                     </div>
                     <div>

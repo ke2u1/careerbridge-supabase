@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -8,19 +8,39 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { AtSign, Lock, LogIn, LucideGithub, Mail } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // This would connect to a real backend in a production app
-    setTimeout(() => {
+    
+    try {
+      await signIn(email, password);
+      navigate('/profile');
+    } catch (error) {
+      console.error("Error signing in:", error);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
+  };
+
+  const handleGithubSignIn = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'github'
+      });
+      
+      if (error) throw error;
+    } catch (error) {
+      console.error("GitHub sign in error:", error);
+    }
   };
 
   return (
@@ -97,7 +117,7 @@ const SignIn = () => {
             </div>
             
             <div className="grid grid-cols-1 gap-2">
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full" onClick={handleGithubSignIn}>
                 <LucideGithub className="mr-2 h-5 w-5" />
                 GitHub
               </Button>

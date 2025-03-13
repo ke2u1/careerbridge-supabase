@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { AtSign, Building, Lock, LucideGithub, Phone, User, UserPlus } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabase";
 
 const SignUp = () => {
   const [fullName, setFullName] = useState("");
@@ -17,14 +19,47 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isCompany, setIsCompany] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+  const { signUp } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords do not match");
+      return;
+    }
+    
+    setPasswordError("");
     setIsLoading(true);
-    // This would connect to a real backend in a production app
-    setTimeout(() => {
+    
+    try {
+      const userData = {
+        full_name: fullName,
+        phone: phone,
+        is_company: isCompany
+      };
+      
+      await signUp(email, password, userData);
+      navigate('/profile');
+    } catch (error) {
+      console.error("Error signing up:", error);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
+  };
+
+  const handleGithubSignUp = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'github'
+      });
+      
+      if (error) throw error;
+    } catch (error) {
+      console.error("GitHub sign up error:", error);
+    }
   };
 
   return (
@@ -114,6 +149,9 @@ const SignUp = () => {
                     required
                   />
                 </div>
+                {passwordError && (
+                  <p className="text-sm text-red-500">{passwordError}</p>
+                )}
               </div>
               
               <div className="flex items-center space-x-2">
@@ -169,7 +207,7 @@ const SignUp = () => {
             </div>
             
             <div className="grid grid-cols-1 gap-2">
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full" onClick={handleGithubSignUp}>
                 <LucideGithub className="mr-2 h-5 w-5" />
                 GitHub
               </Button>
