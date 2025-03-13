@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { AtSign, Building, Lock, LucideGithub, Phone, User, UserPlus } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/integrations/supabase/client";
 
 const SignUp = () => {
   const [fullName, setFullName] = useState("");
@@ -53,7 +53,10 @@ const SignUp = () => {
   const handleGithubSignUp = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'github'
+        provider: 'github',
+        options: {
+          redirectTo: `${window.location.origin}/profile`
+        }
       });
       
       if (error) throw error;
